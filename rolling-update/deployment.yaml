@@ -6,7 +6,7 @@ spec:
   selector:
     matchLabels:
       app: k8s-intro-server
-  replicas: 10
+  replicas: 4
   revisionHistoryLimit: 5
   progressDeadlineSeconds: 300
   minReadySeconds: 10
@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: k8s-intro-server
-        image: drmikehopper/k8s-intro-server:1.1.0
+        image: drmikehopper/k8s-intro-server:1.2.0
         ports:
         - containerPort: 4000
         env:
@@ -29,11 +29,6 @@ spec:
           value: development
         - name: DEBUG
           value: express:server
-        - name: COLOR
-          valueFrom:
-            configMapKeyRef:
-              name: server-configmap
-              key: COLOR
         resources:
           limits:
             memory: 512Mi
