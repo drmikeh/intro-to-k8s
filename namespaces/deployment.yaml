@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-intro-server
+  namespace: demo
+spec:
+  selector:
+    matchLabels:
+      app: k8s-intro-server
+  replicas: 4
+  template:
+    metadata:
+      labels:
+        app: k8s-intro-server
+    spec:
+      containers:
+      - name: k8s-intro-server
+        image: drmikehopper/k8s-intro-server:1.2.0
+        ports:
+        - containerPort: 4000

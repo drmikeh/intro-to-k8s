@@ -1,0 +1,3 @@
+milk: 2 gallons
+eggs: 1 dozen
+apples: 6

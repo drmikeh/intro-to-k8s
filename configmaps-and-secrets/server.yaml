@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: k8s-intro-server-svc
+  labels:
+    app: k8s-intro-server
+spec:
+  type: ClusterIP
+  selector:
+    app: k8s-intro-server
+  ports:
+  - appProtocol: HTTP
+    protocol: TCP
+    port: 4000
+    targetPort: 4000
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-intro-server
+spec:
+  selector:
+    matchLabels:
+      app: k8s-intro-server
+  replicas: 2
+  revisionHistoryLimit: 5
+  progressDeadlineSeconds: 300
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-intro-server
+    spec:
+      containers:
+      - name: k8s-intro-server
+        image: drmikehopper/k8s-intro-server:1.2.0
+        # IfNotPresent: IfNotPresent
+        # IfNotPresent: Never
+        ports:
+        - containerPort: 4000
+        env:
+        - name: NODE_ENV
+          value: development
+        - name: DEBUG
+          value: express:server
+        - name: COLOR
+          valueFrom:
+            configMapKeyRef:
+              name: server-configmap
+              key: COLOR
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"

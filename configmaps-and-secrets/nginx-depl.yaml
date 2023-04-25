@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: color-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: color-server
+  template:
+    metadata:
+      labels:
+        app: color-server
+    spec:
+      containers:
+      - name: color-server
+        image: nginx:1.16
+        ports:
+        - containerPort: 80
+        env:
+        - name: NODE_ENV
+          value: production
+        - name: COLOR
+          valueFrom:
+            configMapKeyRef:
+              name: color-configmap
+              key: COLOR
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"
+

@@ -1,0 +1,8 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: groceries
+data:
+  milk: "2 gallons"
+  eggs: "1 dozen"
+  apples: "6"
