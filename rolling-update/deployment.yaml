@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: k8s-intro-server
-        image: drmikehopper/k8s-intro-server:1.2.0
+        image: drmikehopper/k8s-intro-server:1.1.0
         ports:
         - containerPort: 4000
         env:
