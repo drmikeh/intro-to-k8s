@@ -1,0 +1,11 @@
+#!/bin/bash
+
+kubectl delete deployment nginx-deployment
+kubectl delete service nginx-service
+kubectl delete ingress nginx-ingress
+
+sleep 1
+kubectl get all
+
+sleep 1
+kubectl get ingress

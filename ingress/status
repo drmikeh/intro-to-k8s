@@ -1,0 +1,6 @@
+#!/bin/bash
+
+kubectl get all
+kubectl get ingress
+
+# ping -c 2 k8s.local
