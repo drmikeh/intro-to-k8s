@@ -1,1 +1,28 @@
-../rolling-update/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-intro-server
+spec:
+  selector:
+    matchLabels:
+      app: k8s-intro-server
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: k8s-intro-server
+    spec:
+      containers:
+      - name: k8s-intro-server
+        image: drmikehopper/k8s-intro-server:1.1.0
+        ports:
+        - containerPort: 4000
+        env:
+        - name: NODE_ENV
+          value: development
+        - name: DEBUG
+          value: express:server
+        resources:
+          limits:
+            memory: 512Mi
+            cpu: "1"
